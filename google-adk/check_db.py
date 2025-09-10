@@ -5,6 +5,14 @@ import sys
 import os
 import urllib.parse as urlparse
 import logging
+import dotenv
+
+dotenv.load_dotenv()
+
+# Default values
+# DEFAULT_MCP_URL = os.getenv("PG_MCP_URL", "http://localhost:8000/sse")
+DATABASE_URL = os.getenv("DATABASE_URL", "")
+# DEFAULT_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -15,15 +23,7 @@ def check_postgresql_connection_and_fetch_data():
     """
     # 환경 변수에서 DATABASE_URL을 가져옵니다.
     # 예시: '
-    DATABASE_URL = 'postgresql://toolbox_user:my-password@127.0.0.1:5432/toolbox_db'
-    # DATABASE_URL = os.getenv("DATABASE_URL")
-
-    #     kind: postgres
-    # host: 127.0.0.1
-    # port: 5432
-    # database: toolbox_db
-    # user: toolbox_user
-    # password: my-password
+    DATABASE_URL = os.getenv("DATABASE_URL")
 
     if not DATABASE_URL:
         logging.error("❌ 환경 변수 DATABASE_URL이 설정되지 않았습니다.")
