@@ -1,0 +1,131 @@
+# tools.yaml
+
+toolsets:
+  my-toolset:
+    - search-hotels-by-name
+    - search-hotels-by-location
+    - book-hotel
+    - cancel-hotel
+    - update-hotel
+    - get-table-schema
+    - get-sample-data
+    - list-all-tables
+
+list-all-tables:
+  kind: http-rest
+  url: http://127.0.0.1:8000/list-all-tables
+  description: Returns a list of all user-defined tables in the connected database. Use this to understand the available data sources.
+  http_method: GET
+  request_schema:
+    type: object
+    properties: {}
+
+get-table-schema:
+  kind: http-rest
+  url: http://127.0.0.1:8000/get-table-schema
+  description: Returns the schema (column names and types) for a specified table. Use this to understand the structure of the database before making other calls.
+  http_method: GET
+  request_schema:
+    type: object
+    properties:
+      table_name:
+        type: string
+        description: The name of the table to get the schema for.
+
+get-sample-data:
+  kind: http-rest
+  url: http://127.0.0.1:8000/get-sample-data
+  description: Returns a few sample rows from a specified table. Use this to understand the type and format of data in a table.
+  http_method: GET
+  request_schema:
+    type: object
+    properties:
+      table_name:
+        type: string
+        description: The name of the table to get sample data from.
+      limit:
+        type: integer
+        description: The number of rows to return. Default is 5.
+
+search-hotels-by-name:
+  kind: http-rest
+  url: http://127.0.0.1:8000/search-hotels-by-name
+  description: Search for hotels based on name.
+  http_method: GET
+  request_schema:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the hotel to search for.
+      user_id:
+        type: string
+        description: The ID of the user making the request.
+
+search-hotels-by-location:
+  kind: http-rest
+  url: http://127.0.0.1:8000/search-hotels-by-location
+  description: Search for hotels based on location.
+  http_method: GET
+  request_schema:
+    type: object
+    properties:
+      location:
+        type: string
+        description: The location of the hotel.
+      user_id:
+        type: string
+        description: The ID of the user making the request.
+
+book-hotel:
+  kind: http-rest
+  url: http://127.0.0.1:8000/book-hotel
+  description: Book a hotel.
+  http_method: POST
+  request_schema:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: The ID of the hotel to book.
+      user_id:
+        type: string
+        description: The ID of the user making the request.
+
+cancel-hotel:
+  kind: http-rest
+  url: http://127.0.0.1:8000/cancel-hotel
+  description: Cancel a hotel booking.
+  http_method: POST
+  request_schema:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: The ID of the hotel booking to cancel.
+      user_id:
+        type: string
+        description: The ID of the user making the request.
+
+update-hotel:
+  kind: http-rest
+  url: http://127.0.0.1:8000/update-hotel
+  description: Update hotel booking dates.
+  http_method: POST
+  request_schema:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: The ID of the hotel booking to update.
+      user_id:
+        type: string
+        description: The ID of the user making the request.
+      checkin_date:
+        type: string
+        format: date
+        description: The new check-in date.
+      checkout_date:
+        type: string
+        format: date
+        description: The new check-out date.
