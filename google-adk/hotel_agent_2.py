@@ -16,7 +16,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # TODO(developer): replace this with your Google API key
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyB9N-LHe7ICJXKza82KY9r77wGUy9H3AMA'
+os.environ['GOOGLE_API_KEY'] = 'your-api-key'
 
 async def main():
     try:
